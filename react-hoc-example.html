@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <style>
+    :root {
+      --red: #c72030;
+      --green: #335644;
+      --black: #272727;
+      --yellow: #ffc600;
+    }
+
+    html {
+      box-sizing: border-box;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+
+    body {
+      font-family: sans-serif;
+      background: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      color: var(--black);
+      text-align: center;
+    }
+
+    .valid {
+      border: 3px solid var(--green);
+      background-color: var(--green);
+    }
+
+    .error {
+      border: 3px solid var(--red);
+      background-color: var(--red);
+    }
+
+    .valid>h1 {
+      color: var(--yellow);
+    }
+
+    .error>h1 {
+      color: var(--black);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="text/babel">
+    // Higher-Order-Component example:
+    const withValidation = (WrappedComp) => ({ val }) => <WrappedComp isValid={val > 1} />
+
+    const Hello = ({ isValid }) => <div className={isValid ? 'valid' : 'error'}><h1>"Hello, World!"</h1></div>
+
+    const ValidatedHello = withValidation(Hello)
+
+    const App = ({ val }) => <ValidatedHello val={val} />
+
+    ReactDOM.render(<App val={12} />, document.getElementById("app"))
+  </script>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+</body>
+
+</html>
